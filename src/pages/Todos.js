@@ -27,7 +27,7 @@ export default function Todos() {
             </thead>
             <tbody>
               {data.map((x, i) => (
-                <tr key={i}>
+                <tr key={x._id}>
                   <td>{i + 1}</td>
                   <td>{x._id}</td>
                   <td>{x.text}</td>
