@@ -47,7 +47,7 @@ export default function TodoForm({
       <Form.Group controlId="todoComplete">
         <Form.Check
           type="checkbox"
-          label="done!"
+          label="Task complete"
           value={values.complete}
           onChange={(e) => {
             setValue("complete", e.target.checked);
