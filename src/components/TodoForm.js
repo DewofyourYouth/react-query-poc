@@ -49,7 +49,9 @@ export default function TodoForm({
           type="checkbox"
           label="done!"
           value={values.complete}
-          onChange={(e) => setValue("complete", e.target.value)}
+          onChange={(e) => {
+            setValue("complete", e.target.checked);
+          }}
         />
       </Form.Group>
       <Button variant="primary" type="submit">

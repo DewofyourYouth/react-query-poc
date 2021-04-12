@@ -47,6 +47,7 @@ app.get("/todos", async (req, res) => {
 app.post("/todo", async (req, res) => {
   const todo = new Todo({
     text: req.body.text,
+    complete: req.body.complete,
   });
   try {
     const newTodo = await todo.save();
