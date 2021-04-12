@@ -21,24 +21,25 @@ function Router() {
           <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="/">React Query POC</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" />
-            <Nav className="mr-auto">
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/test-api">
-                <Nav.Link>Test DatAlign API</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/test-express">
-                <Nav.Link>Test Express API</Nav.Link>
-              </LinkContainer>{" "}
-              <LinkContainer to="/pong">
-                <Nav.Link>Ping Pong</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/todos">
-                <Nav.Link>Todos</Nav.Link>
-              </LinkContainer>
-            </Nav>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <LinkContainer to="/">
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/test-api">
+                  <Nav.Link>Test DatAlign API</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/test-express">
+                  <Nav.Link>Test Express API</Nav.Link>
+                </LinkContainer>{" "}
+                <LinkContainer to="/pong">
+                  <Nav.Link>Ping Pong</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/todos">
+                  <Nav.Link>Todos</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            </Navbar.Collapse>
           </Navbar>
           <Switch>
             <Route exact path="/">
