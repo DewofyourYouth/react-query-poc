@@ -8,7 +8,6 @@ export default function Todos() {
     fetch("http://localhost:8080/todos").then((res) => res.json())
   );
 
-  const createTodo = () => console.log("placeholder");
   if (isLoading) return "Loading...";
   if (error) return "An error occurred " + error.message;
   return (
@@ -43,11 +42,7 @@ export default function Todos() {
         <Col>
           <h3>Create New Todo:</h3>
           <hr />
-          <TodoForm
-            onSubmit={createTodo}
-            clearOnSubmit
-            submitText={() => console.log("placeholder")}
-          />
+          <TodoForm clearOnSubmit />
         </Col>
       </Row>
     </>

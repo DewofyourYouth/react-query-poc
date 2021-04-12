@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 const defaultValues = {
   text: "",
@@ -7,29 +9,21 @@ const defaultValues = {
 };
 
 export default function TodoForm({
-  onSubmit,
   initialValues = defaultValues,
-  submitText,
   clearOnSubmit,
 }) {
   const [values, setValues] = useState(initialValues);
+  const mut = useMutation((newTodo) => axios.post("/todo", newTodo));
 
   const setValue = (field, value) =>
     setValues((old) => ({ ...old, [field]: value }));
-  const handleSubmit = (e) => {
-    if (clearOnSubmit) {
-      setValues(defaultValues);
-    }
-    e.preventDefault();
-    onSubmit(values);
-  };
 
   useEffect(() => {
     setValues(initialValues);
   }, [initialValues]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={() => mut.mutate({ ...values })}>
       <Form.Group controlId="todoText">
         <Form.Label>Text</Form.Label>
         <Form.Control
@@ -48,7 +42,7 @@ export default function TodoForm({
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        SUBMIT
       </Button>
     </Form>
   );
