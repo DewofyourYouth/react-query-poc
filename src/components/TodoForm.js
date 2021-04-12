@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 const defaultValues = {
@@ -13,7 +13,13 @@ export default function TodoForm({
   clearOnSubmit,
 }) {
   const [values, setValues] = useState(initialValues);
-  const mut = useMutation((newTodo) => axios.post("/todo", newTodo));
+  const queryClient = useQueryClient();
+  const mut = useMutation((newTodo) => axios.post("/todo", newTodo), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todosData");
+      setValue("text", "");
+    },
+  });
 
   const setValue = (field, value) =>
     setValues((old) => ({ ...old, [field]: value }));
@@ -23,7 +29,12 @@ export default function TodoForm({
   }, [initialValues]);
 
   return (
-    <Form onSubmit={() => mut.mutate({ ...values })}>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        mut.mutate({ ...values });
+      }}
+    >
       <Form.Group controlId="todoText">
         <Form.Label>Text</Form.Label>
         <Form.Control
