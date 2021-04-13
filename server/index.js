@@ -31,10 +31,6 @@ app.get("/", function (req, res) {
   return res.send({ message: "the express api running" });
 });
 
-app.get("/cheese/:cheeseType", function (req, res) {
-  return res.send({ message: `The cheese is ${req.params.cheeseType}` });
-});
-
 app.get("/todos", async (req, res) => {
   try {
     const todos = await Todo.find();

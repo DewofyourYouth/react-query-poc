@@ -1,13 +1,14 @@
 import { Col, Row, Table } from "react-bootstrap";
 import { useQuery } from "react-query";
-import QueryTable from "../components/QueryTable";
 import TodoForm from "../components/TodoForm";
+import { useHistory, Link } from "react-router-dom";
+import { TodoCheck } from "../components/TodoCheck";
 
 export default function Todos() {
   const { isLoading, error, data } = useQuery("todosData", () =>
     fetch("http://localhost:8080/todos").then((res) => res.json())
   );
-
+  const history = useHistory();
   if (isLoading) return "Loading...";
   if (error) return "An error occurred " + error.message;
   return (
@@ -20,18 +21,25 @@ export default function Todos() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>_id</th>
-                <th>text</th>
-                <th>complete</th>
+                <th>Date / Time Created</th>
+                <th>To Do</th>
+                <th>Complete</th>
               </tr>
             </thead>
             <tbody>
               {data.map((x, i) => (
                 <tr key={x._id}>
                   <td>{i + 1}</td>
-                  <td>{x._id}</td>
-                  <td>{x.text}</td>
-                  <td>{x.complete ? "🗹" : "☐"}</td>
+                  <td>
+                    {new Date(x.dateCreated).toLocaleDateString()}{" "}
+                    {new Date(x.dateCreated).toLocaleTimeString()}
+                  </td>
+                  <td>
+                    <Link to={"/todo/" + x._id}>{x.text}</Link>
+                  </td>
+                  <td>
+                    <TodoCheck todo={x} />
+                  </td>
                 </tr>
               ))}
             </tbody>

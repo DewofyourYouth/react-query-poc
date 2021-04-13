@@ -10,6 +10,7 @@ import TestExpressAPI from "./pages/TestExpressAPI";
 import PingPong from "./pages/PingPong";
 import Todos from "./pages/Todos";
 import TodoForm from "./components/TodoForm";
+import Todo from "./pages/Todo";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ function Router() {
             <Route path="/add-todo">
               <TodoForm onSubmit={() => console.log("Boom!")} />
             </Route>
+            <Route path={"/todo/:id"} component={Todo} />
           </Switch>
         </Container>
       </BrowserRouter>
